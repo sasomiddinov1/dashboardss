@@ -1,0 +1,51 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-title mb-0">Groups</p>
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Specification</th>
+                  <th>Block</th>
+                  <th>Time</th>
+                  <th>Language</th>
+                  <th>Mentor</th>
+                  <th>Students</th>
+                  <th>Status</th>
+                  <th>Update</th>
+                  <th>Delete</th>
+                </tr>  
+              </thead>
+              <tbody>
+                {% for group in groups %}
+                <tr>
+                  <td>{{ group.name }}</td>
+                  <td>{{ group.specification }}</td>
+                  <td>{{ group.block }}</td>
+                  <td>{{ group.time }}</td>
+                  <td>{{ group.language }}</td>
+                  <td>{{ group.mentor }}</td>
+                  <td>{{ group.student_qty }}</td>
+                  <td class="font-weight-bold">{{ group.status }}</td>
+                  <td>
+                    <a class="badge badge-success" href="{% url 'update_group' group.id %}">update</a>
+                  </td>
+                  <td>
+                    <a class="badge badge-danger" href="{% url 'delete_group' group.id %}" >delete</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

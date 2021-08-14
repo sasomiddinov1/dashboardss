@@ -1,0 +1,58 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-title mb-0">Mentors</p>
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+              <thead>
+                <tr>
+                  <th>Fullname</th>
+                  <th>Birth date</th>
+                  <th>Specification</th>
+                  <th>Level</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Address</th>
+                  <th>Salary</th>
+                  <th>Action</th>
+                </tr>  
+              </thead>
+              <tbody>
+                {% for mentor in mentors %}
+                <tr>
+                  <td>{{ mentor.full_name }}</td>
+                  <td>{{ mentor.birth_date }}</td>
+                  <td>{{ mentor.specification }}</td>
+                  {% if mentor.level == "JUNIOR" %}
+                    <td class="font-weight-medium"><div class="badge badge-danger">{{ mentor.level }}</div></td>
+                  {% elif mentor.level == "MIDDLE" %}
+                    <td class="font-weight-medium"><div class="badge badge-warning">{{ mentor.level }}</div></td>
+                    {% elif mentor.level == "SENIOR" %}
+                    <td class="font-weight-medium"><div class="badge badge-success">{{ mentor.level }}</div></td>
+                  {% else %}
+                  {% endif %}
+                  <td>+{{ mentor.phone }}</td>
+                  <td>{{ mentor.email }}</td>
+                  <td>{{ mentor.address }}</td>
+                  <td class="font-weight-bold">${{ mentor.salary }}</td>
+                  <td>
+                    <a class="btn badge badge-success" href="{% url 'update_mentor' mentor.id %}">update</a>
+                  </td>
+                  <td>
+                    <a class="btn badge badge-danger" href="{% url 'delete_mentor' mentor.id %}">delete</a>
+                  </td>
+                  
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

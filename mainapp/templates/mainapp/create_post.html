@@ -1,0 +1,35 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<div class="content-wrapper d-flex align-items-center auth px-0">
+    <div class="row w-100 mx-0">
+      <div class="col-lg-8 mx-auto">
+        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+          <div class="brand-logo">
+            <img src="{% static 'images/logo.svg' %}" alt="logo">
+          </div>
+          <h4>Post Creation panel</h4>
+          <h6 class="font-weight-light">Please fill all information about new post</h6>
+          <form class="pt-3" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              {% render_field form.title type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Title" %}
+            </div>
+            <div class="form-group">
+              {% render_field form.description type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Description" %}
+            </div>
+            <div class="form-group">
+              {% render_field form.date type="date" class="form-control form-control-lg" id="exampleFormControlSelect2"placeholder="Date" %}
+            </div>
+            <div class="mt-3">
+              <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">ADD POST</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
